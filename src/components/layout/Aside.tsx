@@ -4,7 +4,7 @@ const Aside = () => {
     { label: "Status", value: "Taking on new clients" },
     { label: "Current", value: "Graph Protocol infrastructure" },
     { label: "Experience", value: "15 years in production" },
-    { label: "Company", value: "Woven Signal - wovensignal.xyz" },
+    { label: "Company", value: "Woven Signal - <a href='https://wovensignal.xyz' target='_blank' rel='noopener noreferrer'>wovensignal.xyz</a>" },
   ];
 
   return (
