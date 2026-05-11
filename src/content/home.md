@@ -1,8 +1,8 @@
 # Tyler Wolf
 
-Infrastructure Engineer for Crypto Protocols
+Senior Platform & Infrastructure Engineer
 
-I work with crypto and Web3 infrastructure teams on the systems that actually have to work — node operations, distributed backends, protocol-level infrastructure, and the reliability engineering that keeps them running in production.
+I work with engineering teams on backend systems and infrastructure where reliability and correctness aren't optional — from cloud-native platforms to bare-metal distributed systems, including production blockchain infrastructure.
 
 ## Profile
 
