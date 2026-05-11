@@ -7,5 +7,9 @@ export const contactInfo = {
   github: {
     url: "https://github.com/thetylerwolf",
     display: "github.com/thetylerwolf"
+  },
+  company: {
+    name: "Woven Signal",
+    url: "https://wovensignal.xyz"
   }
 };

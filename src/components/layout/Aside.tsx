@@ -1,9 +1,10 @@
 const Aside = () => {
   const items = [
     { label: "Location", value: "Stockholm · CET" },
-    { label: "Status", value: "Available for select engagements" },
-    { label: "Current", value: "Private crypto infrastructure engagement" },
+    { label: "Status", value: "Taking on new clients" },
+    { label: "Current", value: "Graph Protocol infrastructure" },
     { label: "Experience", value: "15 years in production" },
+    { label: "Company", value: "Woven Signal - wovensignal.xyz" },
   ];
 
   return (
