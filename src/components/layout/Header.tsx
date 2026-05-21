@@ -6,8 +6,13 @@ const Header = () => {
   const navItems = [
     { path: "/", label: "About" },
     { path: "/experience", label: "Experience" },
+    { path: "/writing", label: "Writing" },
     { path: "/contact", label: "Contact" },
   ];
+
+  const isActive = (path: string) =>
+    location.pathname === path ||
+    (path !== "/" && location.pathname.startsWith(`${path}/`));
 
   return (
     <header className="pt-12 pb-8 md:pt-16 md:pb-12">
@@ -18,7 +23,7 @@ const Header = () => {
               <Link
                 to={item.path}
                 className={`transition-colors duration-200 ${
-                  location.pathname === item.path
+                  isActive(item.path)
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}

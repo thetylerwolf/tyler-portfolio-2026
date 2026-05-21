@@ -3,10 +3,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import Experience from "./pages/Experience";
 import Contact from "./pages/Contact";
+import WritingIndex from "./pages/WritingIndex";
+import WritingPost from "./pages/WritingPost";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -63,16 +66,20 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <RedirectHandler />
-        <PageViewTracker />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <HelmetProvider>
+        <BrowserRouter>
+          <RedirectHandler />
+          <PageViewTracker />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/writing" element={<WritingIndex />} />
+            <Route path="/writing/:slug" element={<WritingPost />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </HelmetProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
