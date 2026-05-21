@@ -9,98 +9,43 @@ export interface PageMeta {
   twitterCard: string;
 }
 
-function replaceTag(html: string, pattern: RegExp, replacement: string): string {
-  if (pattern.test(html)) {
-    return html.replace(pattern, replacement);
-  }
-  return html;
+/** Remove default SEO tags from the Vite HTML template before injecting page-specific meta. */
+export function stripSeoTags(html: string): string {
+  return html
+    .replace(/<title>[\s\S]*?<\/title>\s*/i, "")
+    .replace(/<meta name="description"[^>]*\/?>\s*/gi, "")
+    .replace(/<meta name="author"[^>]*\/?>\s*/gi, "")
+    .replace(/<link rel="canonical"[^>]*\/?>\s*/gi, "")
+    .replace(/<meta property="og:[^"]+"[^>]*\/?>\s*/gi, "")
+    .replace(/<meta name="twitter:[^"]+"[^>]*\/?>\s*/gi, "");
+}
+
+function buildMetaBlock(meta: PageMeta): string {
+  return `    <title>${escapeHtml(meta.title)}</title>
+    <meta name="description" content="${escapeAttr(meta.description)}" />
+    <meta name="author" content="${escapeAttr(meta.author)}" />
+    <link rel="canonical" href="${escapeAttr(meta.canonical)}" />
+
+    <meta property="og:title" content="${escapeAttr(meta.ogTitle)}" />
+    <meta property="og:description" content="${escapeAttr(meta.description)}" />
+    <meta property="og:type" content="${escapeAttr(meta.ogType)}" />
+    <meta property="og:url" content="${escapeAttr(meta.canonical)}" />
+    <meta property="og:image" content="${escapeAttr(meta.ogImage)}" />
+
+    <meta name="twitter:card" content="${escapeAttr(meta.twitterCard)}" />
+    <meta name="twitter:title" content="${escapeAttr(meta.ogTitle)}" />
+    <meta name="twitter:description" content="${escapeAttr(meta.description)}" />
+    <meta name="twitter:image" content="${escapeAttr(meta.ogImage)}" />
+
+`;
 }
 
 export function applyMeta(template: string, meta: PageMeta): string {
-  let html = template;
-
-  html = replaceTag(html, /<title>[^<]*<\/title>/, `<title>${escapeHtml(meta.title)}</title>`);
-
-  html = replaceTag(
-    html,
-    /<meta name="description" content="[^"]*"\s*\/?>/,
-    `<meta name="description" content="${escapeAttr(meta.description)}" />`,
+  const stripped = stripSeoTags(template);
+  return stripped.replace(
+    /(<meta name="viewport"[^>]*\/?>)\s*/i,
+    `$1\n\n${buildMetaBlock(meta)}`,
   );
-
-  html = replaceTag(
-    html,
-    /<meta name="author" content="[^"]*"\s*\/?>/,
-    `<meta name="author" content="${escapeAttr(meta.author)}" />`,
-  );
-
-  html = replaceTag(
-    html,
-    /<link rel="canonical" href="[^"]*"\s*\/?>/,
-    `<link rel="canonical" href="${escapeAttr(meta.canonical)}" />`,
-  );
-
-  html = replaceTag(
-    html,
-    /<meta property="og:title" content="[^"]*"\s*\/?>/,
-    `<meta property="og:title" content="${escapeAttr(meta.ogTitle)}" />`,
-  );
-
-  html = replaceTag(
-    html,
-    /<meta property="og:description" content="[^"]*"\s*\/?>/,
-    `<meta property="og:description" content="${escapeAttr(meta.description)}" />`,
-  );
-
-  html = replaceTag(
-    html,
-    /<meta property="og:type" content="[^"]*"\s*\/?>/,
-    `<meta property="og:type" content="${escapeAttr(meta.ogType)}" />`,
-  );
-
-  if (/<meta property="og:url"/.test(html)) {
-    html = replaceTag(
-      html,
-      /<meta property="og:url" content="[^"]*"\s*\/?>/,
-      `<meta property="og:url" content="${escapeAttr(meta.canonical)}" />`,
-    );
-  } else {
-    html = html.replace(
-      /<meta property="og:type" content="[^"]*"\s*\/?>/,
-      `<meta property="og:type" content="${escapeAttr(meta.ogType)}" />\n    <meta property="og:url" content="${escapeAttr(meta.canonical)}" />`,
-    );
-  }
-
-  html = replaceTag(
-    html,
-    /<meta property="og:image" content="[^"]*"\s*\/?>/,
-    `<meta property="og:image" content="${escapeAttr(meta.ogImage)}" />`,
-  );
-
-  html = replaceTag(
-    html,
-    /<meta name="twitter:card" content="[^"]*"\s*\/?>/,
-    `<meta name="twitter:card" content="${escapeAttr(meta.twitterCard)}" />`,
-  );
-
-  html = replaceTag(
-    html,
-    /<meta name="twitter:title" content="[^"]*"\s*\/?>/,
-    `<meta name="twitter:title" content="${escapeAttr(meta.ogTitle)}" />`,
-  );
-
-  html = replaceTag(
-    html,
-    /<meta name="twitter:description" content="[^"]*"\s*\/?>/,
-    `<meta name="twitter:description" content="${escapeAttr(meta.description)}" />`,
-  );
-
-  html = replaceTag(
-    html,
-    /<meta name="twitter:image" content="[^"]*"\s*\/?>/,
-    `<meta name="twitter:image" content="${escapeAttr(meta.ogImage)}" />`,
-  );
-
-  return html;
 }
 
 function escapeHtml(text: string): string {

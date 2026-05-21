@@ -1,4 +1,6 @@
+import { useLayoutEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import { removeStaticSeoTags } from "@/lib/remove-static-seo";
 import {
   writingSeo,
   writingIndexUrl,
@@ -11,6 +13,10 @@ interface WritingSeoProps {
 }
 
 const WritingSeo = ({ post }: WritingSeoProps) => {
+  useLayoutEffect(() => {
+    removeStaticSeoTags();
+  }, []);
+
   const isIndex = !post;
   const pageTitle = isIndex ? writingSeo.sectionTitle : post.title;
   const documentTitle = writingSeo.documentTitle(pageTitle);
