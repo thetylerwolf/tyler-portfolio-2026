@@ -76,7 +76,3 @@ That's what makes blockchain infrastructure different from most backend operatio
 Keeping nodes healthy over time is an active discipline. It means monitoring beyond process health checks, staying current with client releases and network announcements, knowing where the operator communities are for the chains you run, and periodically questioning assumptions you made during initial setup.
 
 The operators who do this well treat their nodes the way you'd treat any critical piece of infrastructure: with documented runbooks, regular audits, and a healthy skepticism toward green dashboards.
-
----
-
-I'm a freelance platform engineer specializing in distributed systems and blockchain infrastructure. If your team is running nodes and wants someone who's seen these failure modes firsthand, [I'd love to talk](https://tylernwolf.com/contact).
