@@ -1,5 +1,6 @@
 export interface WritingPostMeta {
   title: string;
+  subtitle?: string;
   description: string;
   date: string;
   slug: string;

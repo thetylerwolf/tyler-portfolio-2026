@@ -77,8 +77,14 @@ export function parseWritingPost(path: string, raw: string): WritingPost {
   const dateStr =
     date instanceof Date ? date.toISOString().slice(0, 10) : String(date);
 
+  const subtitle =
+    typeof data.subtitle === "string" && data.subtitle.trim()
+      ? data.subtitle.trim()
+      : undefined;
+
   return {
     title: title.trim(),
+    subtitle,
     description: description.trim(),
     date: dateStr,
     slug,

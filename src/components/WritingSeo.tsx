@@ -12,9 +12,8 @@ interface WritingSeoProps {
 
 const WritingSeo = ({ post }: WritingSeoProps) => {
   const isIndex = !post;
-  const title = isIndex
-    ? writingSeo.titleTemplate(writingSeo.sectionTitle)
-    : writingSeo.titleTemplate(post.title);
+  const pageTitle = isIndex ? writingSeo.sectionTitle : post.title;
+  const documentTitle = writingSeo.documentTitle(pageTitle);
   const description = isIndex ? writingSeo.sectionDescription : post.description;
   const canonical = isIndex ? writingIndexUrl() : writingPostUrl(post.slug);
   const ogImage = post?.ogImage ?? writingSeo.defaultOgImage;
@@ -22,19 +21,19 @@ const WritingSeo = ({ post }: WritingSeoProps) => {
 
   return (
     <Helmet>
-      <title>{title}</title>
+      <title>{documentTitle}</title>
       <meta name="description" content={description} />
       <meta name="author" content={writingSeo.author} />
       <link rel="canonical" href={canonical} />
 
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={ogImage} />
 
       <meta name="twitter:card" content={writingSeo.twitterCard} />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
     </Helmet>

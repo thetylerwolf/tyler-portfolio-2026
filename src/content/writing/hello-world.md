@@ -1,6 +1,7 @@
 ---
 title: "Hello world"
-description: "A short placeholder post to verify the writing section, routing, and build-time prerender."
+subtitle: "A short placeholder post to verify the writing section, routing, and build-time prerender."
+description: "On silent blockchain node failure modes — peer health, stale state, and what green monitoring misses."
 date: 2026-05-21
 slug: hello-world
 published: true
@@ -76,5 +77,6 @@ Keeping nodes healthy over time is an active discipline. It means monitoring bey
 
 The operators who do this well treat their nodes the way you'd treat any critical piece of infrastructure: with documented runbooks, regular audits, and a healthy skepticism toward green dashboards.
 
+---
 
 I'm a freelance platform engineer specializing in distributed systems and blockchain infrastructure. If your team is running nodes and wants someone who's seen these failure modes firsthand, [I'd love to talk](https://tylernwolf.com/contact).

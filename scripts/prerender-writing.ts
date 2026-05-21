@@ -21,7 +21,7 @@ function writePrerenderedHtml(relativeDir: string, meta: PageMeta): void {
   fs.writeFileSync(path.join(outDir, "index.html"), html);
 }
 
-function baseMeta(overrides: Partial<PageMeta> & Pick<PageMeta, "title" | "description" | "canonical" | "ogType">): PageMeta {
+function baseMeta(overrides: Partial<PageMeta> & Pick<PageMeta, "title" | "ogTitle" | "description" | "canonical" | "ogType">): PageMeta {
   return {
     author: writingSeo.author,
     ogImage: writingSeo.defaultOgImage,
@@ -38,7 +38,8 @@ if (!template.includes("<div id=\"root\">")) {
 writePrerenderedHtml(
   "writing",
   baseMeta({
-    title: writingSeo.titleTemplate(writingSeo.sectionTitle),
+    title: writingSeo.documentTitle(writingSeo.sectionTitle),
+    ogTitle: writingSeo.sectionTitle,
     description: writingSeo.sectionDescription,
     canonical: writingIndexUrl(),
     ogType: "website",
@@ -50,7 +51,8 @@ for (const post of posts) {
   writePrerenderedHtml(
     path.join("writing", post.slug),
     baseMeta({
-      title: writingSeo.titleTemplate(post.title),
+      title: writingSeo.documentTitle(post.title),
+      ogTitle: post.title,
       description: post.description,
       canonical: writingPostUrl(post.slug),
       ogType: "article",

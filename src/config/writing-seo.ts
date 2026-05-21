@@ -4,7 +4,7 @@ export const writingSeo = {
   sectionTitle: "Writing",
   sectionDescription:
     "Essays on platform engineering, infrastructure, and building systems where reliability matters.",
-  titleTemplate: (title: string) => `${title} — Tyler Wolf`,
+  documentTitle: (title: string) => `${title} | Tyler Wolf`,
   defaultOgImage: "https://tylernwolf.com/favicon@2x.png",
   twitterCard: "summary_large_image" as const,
 };

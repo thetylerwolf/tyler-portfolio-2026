@@ -50,6 +50,11 @@ const WritingPost = () => {
           <h1 className="font-serif text-3xl md:text-4xl font-normal mb-4 tracking-normal">
             {post.title}
           </h1>
+          {post.subtitle && (
+            <p className="font-sans text-muted-foreground text-body mb-6">
+              {post.subtitle}
+            </p>
+          )}
         </header>
         <section className="prose">
           <Markdown content={post.body} />

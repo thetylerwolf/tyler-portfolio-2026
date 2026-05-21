@@ -1,5 +1,6 @@
 export interface PageMeta {
   title: string;
+  ogTitle: string;
   description: string;
   canonical: string;
   ogType: "website" | "article";
@@ -41,7 +42,7 @@ export function applyMeta(template: string, meta: PageMeta): string {
   html = replaceTag(
     html,
     /<meta property="og:title" content="[^"]*"\s*\/?>/,
-    `<meta property="og:title" content="${escapeAttr(meta.title)}" />`,
+    `<meta property="og:title" content="${escapeAttr(meta.ogTitle)}" />`,
   );
 
   html = replaceTag(
@@ -84,7 +85,7 @@ export function applyMeta(template: string, meta: PageMeta): string {
   html = replaceTag(
     html,
     /<meta name="twitter:title" content="[^"]*"\s*\/?>/,
-    `<meta name="twitter:title" content="${escapeAttr(meta.title)}" />`,
+    `<meta name="twitter:title" content="${escapeAttr(meta.ogTitle)}" />`,
   );
 
   html = replaceTag(
