@@ -1,0 +1,1 @@
+_I'm a freelance platform engineer specializing in distributed systems and blockchain infrastructure. If your team is running nodes and wants someone who's seen these failure modes firsthand, [I'd love to talk](https://tylernwolf.com/contact)._

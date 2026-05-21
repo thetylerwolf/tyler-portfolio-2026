@@ -1,7 +1,12 @@
+import writingFooterMarkdown from "@/content/writing-footer.md?raw";
 import { parseWritingPost, sortPostsByDateDesc } from "./parse-writing-post";
 import type { WritingPost } from "./writing-types";
 
 export type { WritingPost, WritingPostMeta } from "./writing-types";
+
+export function getWritingFooterMarkdown(): string {
+  return writingFooterMarkdown.trim();
+}
 
 const postModules = import.meta.glob("/src/content/writing/*.md", {
   eager: true,

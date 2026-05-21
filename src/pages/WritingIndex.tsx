@@ -43,11 +43,6 @@ const WritingIndex = () => {
                         {post.title}
                       </Link>
                     </h2>
-                    {post.subtitle && (
-                      <p className="font-sans text-body text-muted-foreground mb-2">
-                        {post.subtitle}
-                      </p>
-                    )}
                     <p className="prose text-body text-muted-foreground font-sans mb-2">
                       {post.description}
                     </p>

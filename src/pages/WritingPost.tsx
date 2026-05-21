@@ -3,11 +3,12 @@ import { format } from "date-fns";
 import Layout from "@/components/layout/Layout";
 import Markdown from "@/components/Markdown";
 import WritingSeo from "@/components/WritingSeo";
-import { getPostBySlug } from "@/lib/writing";
+import { getPostBySlug, getWritingFooterMarkdown } from "@/lib/writing";
 
 const WritingPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : undefined;
+  const footerMarkdown = getWritingFooterMarkdown();
 
   if (!post) {
     return (
@@ -59,6 +60,11 @@ const WritingPost = () => {
         <section className="prose">
           <Markdown content={post.body} />
         </section>
+        {footerMarkdown && (
+          <section className="prose writing-post-footer">
+            <Markdown content={footerMarkdown} />
+          </section>
+        )}
       </article>
     </Layout>
   );

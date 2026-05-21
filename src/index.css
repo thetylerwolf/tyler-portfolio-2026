@@ -149,6 +149,10 @@
     @apply max-w-prose;
   }
 
+  .writing-post-footer {
+    padding-top: 1.7em; /* one line of body text (text-body line-height) */
+  }
+
   .prose p {
     @apply mb-6;
   }
